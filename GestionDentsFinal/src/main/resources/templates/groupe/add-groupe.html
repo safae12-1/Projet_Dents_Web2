@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Group</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Varela Round', sans-serif;
+      background-color: #f5f5f5;
+      color: #566787;
+      font-size: 13px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #fff;
+      background-color: #337ab7;
+      padding: 10px;
+      border-radius: 3px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .custom-select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <h2>Add New Group</h2>
+  <form th:object="${groupe}" th:action="@{/addgroupe}" method="post">
+    <label for="code">Code:</label>
+    <input type="text" id="code" name="code" th:field="*{code}" class="form-control" required />
+
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year" th:field="*{year}" class="form-control" required />
+
+    <label for="profGrp">Professor:</label>
+    <select id="profGrp" name="profGrp.id" th:field="*{profGrp}" class="custom-select" required>
+      <option th:each="prof : ${prof}" th:value="${prof.id}" th:text="${prof.lastName}"></option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Add Group</button>
+    <a class="btn btn-primary " th:href="@{/acceuilgroupe}">Back to List</a>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
